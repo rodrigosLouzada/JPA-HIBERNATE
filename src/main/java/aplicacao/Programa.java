@@ -26,11 +26,20 @@ public class Programa {
 		em.getTransaction().commit();
 		
 		System.out.println("ready!");
-		
+	
 		
 		// test select by id like jdbc selectById
 		Pessoa p = em.find(Pessoa.class, 2);
 		System.out.println(p);
+		
+		// test, remove only works on connections and found
+		Pessoa pexem = new Pessoa(2, null, null); // does not work
+				
+		Pessoa pRemove = em.find(Pessoa.class, 2); // works
+		
+		em.getTransaction().begin();
+		em.remove(pRemove);
+		em.getTransaction().commit();
 		
 		em.close();
 		emf.close();
