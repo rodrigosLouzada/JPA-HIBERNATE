@@ -1,5 +1,6 @@
 package aplicacao;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import dominio.Pessoa;
@@ -9,16 +10,21 @@ import dominio.Pessoa;
 public class Programa {
 
 	public static void main(String[] args) {
-		Pessoa p1 = new Pessoa(1, "dinho", "dinho@gmail.com");
-		Pessoa p2 = new Pessoa(2, "gordinho", "gordinho@gmail.com");
-		Pessoa p3 = new Pessoa(3, "dog", "dog@gmail.com");
+		Pessoa p1 = new Pessoa(null, "dinho", "dinho@gmail.com");
+		Pessoa p2 = new Pessoa(null, "gordinho", "gordinho@gmail.com");
+		Pessoa p3 = new Pessoa(null, "dog", "dog@gmail.com");
 		
 		
-		EntityManagerFactory emfEntityManagerFactory = Persistence.createEntityManagerFactory("exemplo-jpa");
+		EntityManagerFactory emf = Persistence.createEntityManagerFactory("exemplo-jpa");
+		EntityManager em =   emf.createEntityManager();
 		
-		System.out.println(p1);
-		System.out.println(p2);
-		System.out.println(p3);
+		em.getTransaction().begin();
+		em.persist(p1);
+		em.persist(p2);
+		em.persist(p3);
+		em.getTransaction().commit();
+		
+		System.out.println("ready!");
 	}
 
 }
