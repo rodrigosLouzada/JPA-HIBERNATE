@@ -18,6 +18,7 @@ public class Programa {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("exemplo-jpa");
 		EntityManager em =   emf.createEntityManager();
 		
+		//test insert like jdbc insert
 		em.getTransaction().begin();
 		em.persist(p1);
 		em.persist(p2);
@@ -25,6 +26,14 @@ public class Programa {
 		em.getTransaction().commit();
 		
 		System.out.println("ready!");
+		
+		
+		// test select by id like jdbc selectById
+		Pessoa p = em.find(Pessoa.class, 2);
+		System.out.println(p);
+		
+		em.close();
+		emf.close();
 	}
 
 }
