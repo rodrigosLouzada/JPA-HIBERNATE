@@ -26,7 +26,8 @@ public class Programa {
 		em.getTransaction().commit();
 		
 		System.out.println("ready!");
-	
+		
+		
 		
 		// test select by id like jdbc selectById
 		Pessoa p = em.find(Pessoa.class, 2);
@@ -42,7 +43,8 @@ public class Programa {
 		em.getTransaction().commit();
 		
 		em.close();
-		emf.close();
+		emf.close();     
+		
 	}
 
 }
